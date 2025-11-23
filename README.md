@@ -1,6 +1,6 @@
-# BFLA-01KP: Binary Flow Learning Algorithm for 0-1 Knapsack Problem
+# BFLA-01KP: Binary Fick's Law Algorithm for 0-1 Knapsack Problem
 
-This repository contains the implementation of the Binary Flow Learning Algorithm (BFLA) for solving the 0-1 Knapsack Problem (01KP), along with experimental scripts and analysis notebooks.
+This repository contains the implementation of the Binary Fick's Law Algorithm (BFLA) for solving the 0-1 Knapsack Problem (01KP), along with experimental scripts and analysis notebooks.
 
 ## Repository Structure
 
@@ -40,16 +40,19 @@ where `tf = sinh(t / MAXITERA)` is the transformation factor that evolves with i
 The algorithm parameters are defined as constants in `src/BFLA_01KP.cpp`:
 
 ### Algorithm Parameters
+
 - `DIMENSION`: Problem dimension (default: 1000)
 - `POPSIZE`: Population size (default: 20)
 - `MAXITERA`: Maximum iterations (default: 200)
 - `RUNS`: Number of independent runs (default: 10)
 
 ### Search Space
+
 - `lb`: Lower bound for continuous variables (default: -5)
 - `ub`: Upper bound for continuous variables (default: 5)
 
 ### Algorithm-Specific Parameters
+
 - `D`: Distance parameter (default: 0.01)
 - `C1`: Control parameter 1 (default: 1)
 - `C2`: Control parameter 2 (default: 2)
@@ -62,12 +65,14 @@ The algorithm parameters are defined as constants in `src/BFLA_01KP.cpp`:
 ### Transfer Functions
 
 The code includes 16 transfer functions for converting continuous values to binary:
+
 - **S-shaped**: `s_shaped_1`, `s_shaped_2`, `s_shaped_3`, `s_shaped_4`
 - **V-shaped**: `v_shaped_1`, `v_shaped_2`, `v_shaped_3`, `v_shaped_4`
 - **U-shaped**: `u_shaped_1`, `u_shaped_2`, `u_shaped_3`, `u_shaped_4`
 - **T-shaped**: `t_shaped_1`, `t_shaped_2`, `t_shaped_3`, `t_shaped_4`
 
 Currently, the algorithm uses `lf_1(decimal, 3)` for binary conversion, which implements:
+
 ```
 y = log_3((2/(2A)) * x + (4/2))
 ```
@@ -77,12 +82,14 @@ y = log_3((2/(2A)) * x + (4/2))
 ### Windows
 
 Using the provided batch script:
+
 ```bash
 cd scripts
 compile.bat
 ```
 
 Or manually:
+
 ```bash
 g++ -O2 -o BFLA_01KP.exe ../src/BFLA_01KP.cpp -lm
 ```
@@ -90,6 +97,7 @@ g++ -O2 -o BFLA_01KP.exe ../src/BFLA_01KP.cpp -lm
 ### Linux/Mac
 
 Using the provided shell script:
+
 ```bash
 cd scripts
 chmod +x compile.sh
@@ -97,11 +105,13 @@ chmod +x compile.sh
 ```
 
 Or manually:
+
 ```bash
 g++ -O2 -o BFLA_01KP ../src/BFLA_01KP.cpp -lm
 ```
 
 **Requirements:**
+
 - C++ compiler with C++11 support (g++, clang++, or MSVC)
 - Standard math library (`-lm` flag for GCC)
 
@@ -127,12 +137,14 @@ g++ -O2 -o BFLA_01KP ../src/BFLA_01KP.cpp -lm
 From the project root directory:
 
 **Windows:**
+
 ```bash
 cd scripts
 BFLA_01KP.exe
 ```
 
 **Linux/Mac:**
+
 ```bash
 cd scripts
 ./BFLA_01KP
@@ -141,6 +153,7 @@ cd scripts
 #### Batch Execution
 
 Use the provided script to run experiments on multiple instances:
+
 ```bash
 cd scripts
 chmod +x run_experiment.sh
@@ -148,6 +161,7 @@ chmod +x run_experiment.sh
 ```
 
 **Note:** Before running, modify the instance filename in `src/BFLA_01KP.cpp`:
+
 ```cpp
 char filename1[] = "../instances/Instance_01KP_36/<instance_name>.txt";
 ```
@@ -157,18 +171,20 @@ char filename1[] = "../instances/Instance_01KP_36/<instance_name>.txt";
 The algorithm generates two output files:
 
 1. **`results/statistics/BMS.txt`**: Contains statistical summary for each run:
+
    - `Best`: Best fitness value found
    - `Worst`: Worst fitness value found
    - `Mean`: Mean fitness value
    - `Rate`: Success rate (percentage of runs achieving best value)
    - `Std`: Standard deviation
    - `Time`: Average execution time per run (seconds)
-
 2. **`results/convergence/cvg_np30_ikp132.txt`**: Contains convergence data:
+
    - Format: `run1 <fitness_iter1> <fitness_iter2> ... <fitness_iterMAXITERA>`
    - One line per run, showing fitness evolution
 
 **Important:** Ensure the output directories exist:
+
 ```bash
 mkdir -p results/convergence results/statistics
 ```
@@ -199,13 +215,13 @@ The Jupyter notebooks in the `notebooks/` directory provide:
 To use the notebooks:
 
 1. Install required Python packages:
+
    ```bash
    pip install jupyter numpy matplotlib pandas scipy
    ```
-
 2. Update file paths in the notebooks to match your setup
-
 3. Run the notebooks:
+
    ```bash
    jupyter notebook notebooks/
    ```
@@ -215,11 +231,13 @@ To use the notebooks:
 ### Instance File Format
 
 Each instance file contains:
+
 - Line 1: Two unused integers
 - Line 2: Knapsack capacity
 - Lines 3 to 3+DIMENSION-1: Price and weight pairs (one per line)
 
 Example:
+
 ```
 0 0
 1000
@@ -231,11 +249,13 @@ Example:
 ### Output File Format
 
 **BMS.txt format:**
+
 ```
 Best:12345    Worst:12300.000000   Mean:12320.500000    Rate:80.000000    Std:15.231000    Time:2.345000
 ```
 
 **Convergence file format:**
+
 ```
 run1 1000 1200 1300 ... 12345
 run2 1000 1210 1320 ... 12340
@@ -263,19 +283,20 @@ If you use this code in your research, please cite:
 
 ### Common Issues
 
-1. **File not found error**: 
+1. **File not found error**:
+
    - Ensure instance files are extracted to `instances/Instance_01KP_36/`
    - Check the file path in `src/BFLA_01KP.cpp`
-
 2. **Permission denied (Linux/Mac)**:
-   - Make scripts executable: `chmod +x scripts/*.sh`
 
+   - Make scripts executable: `chmod +x scripts/*.sh`
 3. **Compilation errors**:
+
    - Ensure you have a C++ compiler installed
    - For Windows, use MinGW or MSVC
    - For Linux, install build-essential: `sudo apt-get install build-essential`
-
 4. **Output directory errors**:
+
    - Create output directories manually if they don't exist:
      ```bash
      mkdir -p results/convergence results/statistics
@@ -284,4 +305,3 @@ If you use this code in your research, please cite:
 ## Version History
 
 - **v1.0**: Initial release with complete BFLA implementation
-
