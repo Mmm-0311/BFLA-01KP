@@ -1,0 +1,56 @@
+# Compiled executables
+*.exe
+*.out
+*.o
+*.obj
+BFLA_01KP
+BFLA_01KP.exe
+
+# Output files and results
+results/
+*.txt
+!instances/**/*.txt
+
+# Jupyter Notebook checkpoints and outputs
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Build directories
+build/
+dist/
+
+# Archive files (keep the original zip in the repository)
+# Uncomment if you don't want to track zip files
+# *.zip
+
